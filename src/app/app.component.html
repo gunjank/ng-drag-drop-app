@@ -1,10 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<!-- <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
+</div> -->
+
+<!-- <app-simple-dnd></app-simple-dnd> -->
+<div class="card-header">
+  Design your idea
 </div>
-
-<app-simple-dnd></app-simple-dnd>
-
-
+<div class="row">
+  <app-base-panel *ngFor="let panelData of availablePanels" class="card bg-info col-sm-3" [panelData]="panelData"></app-base-panel>
+  <app-base-panel  class="card bg-warning col-sm-3" [panelData]="resultPanel" ></app-base-panel>
+</div>
