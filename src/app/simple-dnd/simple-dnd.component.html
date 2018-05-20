@@ -1,4 +1,68 @@
+<h4>Drag-and-Drop - Shopping basket</h4>
+<div class="card" >
+
+
 <div class="row">
+<!--   
+        <div class="card-header">
+          Featured
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div> -->
+
+
+    <div class="col-sm-3">
+        <div class="card bg-warning" >
+            <div class="card-heading">Available products</div>
+            <div class="card-body">
+                <div *ngFor="let product of availableProducts" class="card bg-info"
+                    dnd-draggable [dragEnabled]="true" [dragData]="product" (onDragSuccess)="orderedProduct($event)"
+                     [dropZones]="['demo1']">
+                    <div class="card-body">
+                        <div [hidden]="product.quantity===0">{{product.name}} - ${{product.cost}}<br>(available: {{product.quantity}})</div>
+                        <div [hidden]="product.quantity>0"><del>{{product.name}}</del><br>(NOT available)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card bg-warning" >
+            <div class="card-heading">Available products</div>
+            <div class="card-body">
+                <div *ngFor="let product of availableProducts" class="card bg-info"
+                    dnd-draggable [dragEnabled]="true" [dragData]="product" (onDragSuccess)="orderedProduct($event)"
+                     [dropZones]="['demo1']">
+                    <div class="card-body">
+                        <div [hidden]="product.quantity===0">{{product.name}} - ${{product.cost}}<br>(available: {{product.quantity}})</div>
+                        <div [hidden]="product.quantity>0"><del>{{product.name}}</del><br>(NOT available)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card bg-warning" >
+        <div dnd-droppable (onDropSuccess)="addToBasket($event)" [dropZones]="['demo1']" class="card card-info">
+            <div class="card-heading">Shopping Basket<br>(to pay: \${{totalCost()}})</div>
+            <div class="card-body">
+                <div *ngFor="let product of shoppingBasket" class="card panel-default">
+                    <div class="card-body">
+                    {{product.name}}<br>(ordered: {{product.quantity}}<br>cost: \${{product.cost * product.quantity}})
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- <div class="row">
   <div class="col-sm-3">
     <div class="card text-white bg-success mb-3" style="max-width: 18rem;" dnd-draggable [dragEnabled]="true">
       <div class="card-header">Header</div>
@@ -19,4 +83,6 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+
