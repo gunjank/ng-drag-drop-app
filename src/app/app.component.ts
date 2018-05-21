@@ -3,6 +3,8 @@ import { PanelData } from './model/panelData';
 import { CardData } from './model/cardData';
 import { MockDataService } from './mock-data.service';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { ConfigService } from './config.service';
+import { HttpResponseData } from './model/httpResponseData';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +16,10 @@ export class AppComponent implements OnInit {
   resultPanel: PanelData = new PanelData();
   resultConfig:Array<PanelData>=[];
   private _data = new BehaviorSubject<PanelData[]>([]);
-
+  private httpResponseData: HttpResponseData;
 
   title = 'Drag & Drop';
-  constructor(private mockDataService: MockDataService) {
+  constructor(private mockDataService: MockDataService,private configService:ConfigService) {
 
     this.basePanelData = mockDataService.getBasePanel();
     // this.resultPanel.name = "Preview";
@@ -41,12 +43,19 @@ export class AppComponent implements OnInit {
   }
 
   showConfig(){
-    if(this.resultConfig.length>0){
-      alert(JSON.stringify(this.resultConfig));
-    }else{
-      alert("No cards added !!");
-    }
+    // if(this.resultConfig.length>0){
+    //   alert(JSON.stringify(this.resultConfig));
+    // }else{
+    //   alert("No cards added !!");
+    // }
    
+    if(this.resultConfig.length>0){
+        this.configService.save(this.resultConfig)
+            .subscribe(httpResponseData => this.httpResponseData)
+             
+    }else {
+        alert("No cards added !!");
+    } 
   }
   createPanel() {
     let p:PanelData = new PanelData();
