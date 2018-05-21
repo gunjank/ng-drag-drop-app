@@ -31,6 +31,8 @@ export class AppComponent {
   showConfig(){
     if(this.resultPanel.availableCards.length>0){
       alert(JSON.stringify(this.resultPanel));
+    }else{
+      alert("No cards added !!");
     }
    
   }
