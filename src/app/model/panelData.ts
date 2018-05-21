@@ -1,8 +1,9 @@
 import { CardData } from "./cardData";
 
 export class PanelData {
-     name: string;
+     name: string="Header";
      className: string;
-     type: string;
+     type: string="P1";
+     baseType:boolean=false;
      availableCards:Array<CardData>=[];
   }

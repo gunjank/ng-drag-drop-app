@@ -1,41 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PanelData } from './model/panelData';
-import { MockData } from './model/mockData';
 import { CardData } from './model/cardData';
+import { MockDataService } from './mock-data.service';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  availablePanels: Array<PanelData> = [];
+export class AppComponent implements OnInit {
+  basePanelData:PanelData=new PanelData();
   resultPanel: PanelData = new PanelData();
-  //availableCards: Array<CardData> = [];
+  resultConfig:Array<PanelData>=[];
+  private _data = new BehaviorSubject<PanelData[]>([]);
+
 
   title = 'Drag & Drop';
-  constructor() {
-    let m: MockData = new MockData();
-    this.availablePanels = m.getListOfPanels();
-    this.resultPanel.name = "Preview";
-    this.resultPanel.type = "P1";
+  constructor(private mockDataService: MockDataService) {
 
-
+    this.basePanelData = mockDataService.getBasePanel();
+    // this.resultPanel.name = "Preview";
+    // this.resultPanel.type = "R1";
   }
 
-  updatePreviewPanel($event: any) {
+  ngOnInit(){
+    this._data.subscribe(x=>{
+        this.resultConfig = this.mockDataService.getResultConfig();
+    });
+  }
+
+  updatePreviewPanel($event: any, p:PanelData) {
     let cardData: CardData = Object.assign({},$event.dragData);
     if(cardData.readyToDrop){
       cardData.readyToDrop = false;
-      this.resultPanel.availableCards.push(cardData);
+      p.availableCards.push(cardData);
     }
    
 
   }
 
   showConfig(){
-    if(this.resultPanel.availableCards.length>0){
-      alert(JSON.stringify(this.resultPanel));
+    if(this.resultConfig.length>0){
+      alert(JSON.stringify(this.resultConfig));
     }else{
       alert("No cards added !!");
     }
