@@ -1,7 +1,14 @@
 var express = require('express');
 var store = require('./datastore');
 var bodyParser = require('body-parser');
-const allConfig= 'allConfig';
+const allConfig = 'allConfig';
+const resultData = () => {
+    return {
+        "message": "",
+        "data": null,
+        "error": null
+    }
+}
 
 var app = express(); // better instead
 // server.configure(function(){
@@ -10,37 +17,60 @@ var app = express(); // better instead
 // });
 
 app.use(express.static(__dirname + '/dist/ng-drag-drop-app'));
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 
 // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('port', process.env.PORT || 3000);
 
-app.get('/config',function(req,res){
+app.get('/config', function (req, res) {
 
-    var data = store.fetch(allConfig);
+    store.fetch(allConfig, (err, value) => {
 
-    console.log('Data in DB '+data)
+        if (value) {
+            console.log('Data in DB ' + value);
+            console.log('Data Retrieved : ' + JSON.stringify(value));
 
-    console.log('Data Retrieved : '+JSON.stringify(data))
+            let result = resultData();
+            result.data = value;
+            result.message = "Success while Fetching record";
+            res.status(200).send(result);
+        } else {
+            console.log('Error  in DB ' + err)
+            let result = resultData();
+            result.error = err;
+            result.message = "Error while Fetching record";
+            res.status(500).send(result);
+        }
+    });
 
-    res.status(200).send(data);
-        
-        
+
 
 })
-app.post('/config',function(req,res){
+app.post('/config', function (req, res) {
 
     var configs = req.body
-    console.log('request payload :: '+ JSON.stringify(configs))
+    console.log('request payload :: ' + JSON.stringify(configs))
 
-    store.save(allConfig,configs)
-    console.log('Data Persisted')
+    store.save(allConfig, configs, (err, value) => {
+        if (value) {
+            console.log("Data Persist " + value)
+            let result = resultData();
+            result.data = value;
+            result.message = "Success while Saving record";
+            res.status(200).send(result);
 
-    res.status(200).send('Save Suceess') 
+        } else {
+            console.log('Error  in DB ' + err)
+            let result = resultData();
+            result.error = err;
+            result.message = "Error while Saving record";
+            res.status(500).send(result);
+        }
+    });
 
-})
+});
 app.listen(app.get('port'));
 console.log('Express server started on port %s', app.get('port'));
 
