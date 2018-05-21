@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { SimpleDndComponent } from './simple-dnd/simple-dnd.component';
 import { BaseCardComponent } from './base-card/base-card.component';
 import { BasePanelComponent } from './base-panel/base-panel.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,11 +15,13 @@ import { BasePanelComponent } from './base-panel/base-panel.component';
     SimpleDndComponent,
     BaseCardComponent,
     BasePanelComponent
+    
   ],
   imports: [
     BrowserModule,
     NgbModule.forRoot(),
-    DndModule.forRoot()
+    DndModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

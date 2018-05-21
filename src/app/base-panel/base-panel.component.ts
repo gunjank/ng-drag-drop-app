@@ -12,6 +12,8 @@ export class BasePanelComponent implements OnInit {
 
   @Input() panelData: PanelData;
   previewPanelType: string = "P1";
+  isHeaderEdit:boolean=false;
+
 
   constructor(private mockDataService: MockDataService) {
     this.previewPanelType = "P1";
@@ -25,6 +27,12 @@ export class BasePanelComponent implements OnInit {
   dragSuccessHandler($event: any) {
     let cardData: CardData = $event.dragData;
     console.log(cardData.name + " " + cardData.type);
+  }
+  editHeader(){
+    if(!this.panelData.baseType){
+      this.isHeaderEdit=true;
+    }
+    
   }
 
 

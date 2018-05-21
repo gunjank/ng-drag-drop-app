@@ -1,9 +1,21 @@
-<div class="card-header">
-  {{panelData.name}}
-</div>
-<!-- <div class="card-body" *ngIf="panelData.baseType" >
+<div class="card-header row">
+ 
+  <label *ngIf="!isHeaderEdit" (click)="editHeader()" > {{panelData.name}}</label>
+  <input *ngIf="isHeaderEdit" (blur)="isHeaderEdit=false" 
+     type="text" 
+      [(ngModel)]="panelData.name">
+  <!-- <div  *ngIf="panelData.baseType" >
 
-  <button class="btn btn-primary" (click)="createPanel()" >Create Panel</button>
+    <button class="btn btn-primary" (click)="createPanel()" >Edit</button>
+  </div> -->
+  
+</div>
+<!-- <div>
+  <label *ngIf="!isEdit" (click)="isEdit=true" >Name</label>
+  <input *ngIf="isEdit" (keydown.enter)="isEdit=false" 
+     type="text" 
+      [(ngModel)]="panelData.name">
+
 </div> -->
 
 
