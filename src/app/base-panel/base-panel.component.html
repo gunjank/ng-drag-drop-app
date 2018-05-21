@@ -7,5 +7,8 @@
   <a href="#" class="btn btn-primary">Go somewhere</a>
 </div> -->
 <div class="card-body">
-  <app-base-card *ngFor="let cardData of availableCards" class="card bg-success" [cardData]=cardData></app-base-card>
+  <app-base-card *ngFor="let cardData of panelData.availableCards" class="card bg-success" [cardData]=cardData
+  dnd-draggable [dragEnabled]="true" [dragData]="cardData" (onDragSuccess)="dragSuccessHandler($event)"
+                     [dropZones]="['demo1']"
+  ></app-base-card>
 </div>

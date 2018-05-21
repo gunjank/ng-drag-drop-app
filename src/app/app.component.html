@@ -7,9 +7,18 @@
 
 <!-- <app-simple-dnd></app-simple-dnd> -->
 <div class="card-header">
-  Design your idea
+  Drag and Drop Cards to Preview Panel.
 </div>
 <div class="row">
-  <app-base-panel *ngFor="let panelData of availablePanels" class="card bg-info col-sm-3" [panelData]="panelData"></app-base-panel>
-  <app-base-panel  class="card bg-warning col-sm-3" [panelData]="resultPanel" ></app-base-panel>
+  <app-base-panel *ngFor="let panelData of availablePanels" class="card bg-info col-sm-3" [panelData]="panelData"
+  ></app-base-panel>
+  
+  <app-base-panel  class="card bg-warning col-sm-3" [panelData]="resultPanel"
+  dnd-droppable (onDropSuccess)="updatePreviewPanel($event)" [dropZones]="['demo1']"
+  ></app-base-panel>
+</div>
+<div class="card-body">
+  <!-- <h5 class="card-title">Special title treatment</h5> -->
+  <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+  <button class="btn btn-primary" (click)="showConfig()" >Show Config</button>
 </div>

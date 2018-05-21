@@ -12,17 +12,20 @@ export class MockData {
             let p:PanelData = new PanelData();
             p.name = item.name;
             p.type = item.type;
+            p.availableCards =this.getListOfCards(p.type);
             res.push(p);
         });
         return res;
     }
-    public getListOfCards = function () {
+    public getListOfCards = function (panelType:string) {
         let res:Array<CardData>=[];
         this.cardData.forEach(item => {
-            let p:CardData = new CardData();
-            p.name = item.name;
-            p.type = item.type;
-            res.push(p);
+            if(panelType===item.type){
+                let p:CardData = new CardData();
+                p.name = item.name;
+                p.type = item.type;
+                res.push(p);
+            }
         });
         return res;
     }

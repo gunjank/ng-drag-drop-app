@@ -11,20 +11,21 @@ import { CardData } from '../model/cardData';
 export class BasePanelComponent implements OnInit {
 
   @Input() panelData: PanelData;
-  availableCards :Array<CardData> = [];
+ 
+ // availableCards :Array<CardData> = [];
   constructor() {
 
 
    }
 
   ngOnInit() {
-    let m:MockData = new MockData();
-    let panelType:string = this.panelData.type;
-    m.getListOfCards().forEach(item=>{
-      if(item.type===panelType){
-        this.availableCards.push(item);
-      }
-    });
+
   }
+
+  dragSuccessHandler($event: any) {
+    let cardData: CardData = $event.dragData;
+    console.log(cardData.name+" "+cardData.type);
+    //orderedProduct.quantity--;
+}
 
 }
