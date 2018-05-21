@@ -26,11 +26,7 @@ export class BasePanelComponent implements OnInit {
     let cardData: CardData = $event.dragData;
     console.log(cardData.name + " " + cardData.type);
   }
-  createPanel() {
-    let p:PanelData = new PanelData();
-    p.type = "C1";
-    this.mockDataService.setResultConfig(p);
-  }
+
 
 
 

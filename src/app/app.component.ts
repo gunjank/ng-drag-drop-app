@@ -48,6 +48,11 @@ export class AppComponent implements OnInit {
     }
    
   }
+  createPanel() {
+    let p:PanelData = new PanelData();
+    p.type = "C1";
+    this.mockDataService.setResultConfig(p);
+  }
 }
 
 

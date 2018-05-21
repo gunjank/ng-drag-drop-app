@@ -10,11 +10,10 @@
   Drag and Drop Cards to Preview Panel.
 </div>
 <div class="row">
-  <app-base-panel  class="card bg-info col-sm-3" [panelData]="basePanelData"  ></app-base-panel>
-  
-  <app-base-panel *ngFor="let panelData of resultConfig" class="card bg-info col-sm-3" [panelData]="panelData" 
-  dnd-droppable (onDropSuccess)="updatePreviewPanel($event,panelData)" [dropZones]="['demo1']"
-  ></app-base-panel>
+  <app-base-panel class="card bg-info col-sm-3" [panelData]="basePanelData"></app-base-panel>
+
+  <app-base-panel *ngFor="let panelData of resultConfig" class="card bg-info col-sm-3" [panelData]="panelData" dnd-droppable
+    (onDropSuccess)="updatePreviewPanel($event,panelData)" [dropZones]="['demo1']"></app-base-panel>
   <!-- <app-base-panel  class="card bg-warning col-sm-3" [panelData]="resultPanel"
  
 
@@ -22,9 +21,12 @@
 
   ></app-base-panel> -->
 </div>
-<div class="card-body">
-  <!-- <h5 class="card-title">Special title treatment</h5> -->
-  <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
-  <button class="btn btn-primary" (click)="showConfig()" >Show Config</button>
-   <!-- dnd-sortable-container [sortableData]="resultPanel.availableCards"     -->
+<div class="row card-body">
+  <span>&nbsp;</span>
+  <button class="btn btn-primary" (click)="createPanel()">Create Panel</button>
+  <span>&nbsp;</span>
+
+  <button class="btn btn-primary" (click)="showConfig()">Show Config</button>
+
+  <!-- dnd-sortable-container [sortableData]="resultPanel.availableCards"     -->
 </div>
