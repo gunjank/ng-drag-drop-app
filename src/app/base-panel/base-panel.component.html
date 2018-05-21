@@ -6,9 +6,20 @@
   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
   <a href="#" class="btn btn-primary">Go somewhere</a>
 </div> -->
-<div class="card-body">
-  <app-base-card *ngFor="let cardData of panelData.availableCards" class="card bg-success" [cardData]=cardData
+
+
+<div class="card-body" *ngIf="panelData.type===P1"    >
+  <app-base-card *ngFor="let cardData of panelData.availableCards; let i = index" class="card bg-success" [cardData]=cardData
+  [dragData]="cardData" (onDragSuccess)="dragSuccessHandler($event)"
+                     dnd-sortable [sortableIndex]="i"
+  >
+  <span dnd-sortable-handle>=</span>
+</app-base-card>
+</div>
+
+<div class="card-body" *ngIf="panelData.type!==P1"   >
+  <app-base-card *ngFor="let cardData of panelData.availableCards " class="card bg-success" [cardData]=cardData
   dnd-draggable [dragEnabled]="true" [dragData]="cardData" (onDragSuccess)="dragSuccessHandler($event)"
-                     [dropZones]="['demo1']"
+                     [dropZones]="['demo1']"  
   ></app-base-card>
 </div>

@@ -11,10 +11,11 @@ import { CardData } from '../model/cardData';
 export class BasePanelComponent implements OnInit {
 
   @Input() panelData: PanelData;
+  previewPanelType:string = "P1";
  
  // availableCards :Array<CardData> = [];
   constructor() {
-
+this.previewPanelType="P1";
 
    }
 
@@ -26,6 +27,9 @@ export class BasePanelComponent implements OnInit {
     let cardData: CardData = $event.dragData;
     console.log(cardData.name+" "+cardData.type);
     //orderedProduct.quantity--;
+}
+checkPanelType(){
+ return  (this.panelData.type==="P1")?true:false;
 }
 
 }

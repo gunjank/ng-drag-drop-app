@@ -18,13 +18,18 @@ export class AppComponent {
     let m: MockData = new MockData();
     this.availablePanels = m.getListOfPanels();
     this.resultPanel.name = "Preview";
+    this.resultPanel.type = "P1";
 
 
   }
 
   updatePreviewPanel($event: any) {
-    let cardData: CardData = $event.dragData;
-    this.resultPanel.availableCards.push(cardData);
+    let cardData: CardData = Object.assign({},$event.dragData);
+    if(cardData.readyToDrop){
+      cardData.readyToDrop = false;
+      this.resultPanel.availableCards.push(cardData);
+    }
+   
 
   }
 
