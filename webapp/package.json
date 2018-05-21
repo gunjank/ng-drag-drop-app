@@ -5,11 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.18.3",
+    "encoding-down": "^5.0.1",
+    "express": "^4.16.3",
+    "level": "^3.0.1",
+    "level-pathwise": "^4.0.0",
+    "leveldown": "^4.0.0",
+    "levelup": "^2.0.2",
+    "prebuild-install": "^4.0.0"
   }
 }
