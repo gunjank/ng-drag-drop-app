@@ -1,4 +1,4 @@
-<div class="card-header row">
+<div class="card-header row bg-warning">
     <div class="col-sm-10">
   <label *ngIf="!isHeaderEdit" (click)="editHeader()" > {{panelData.name}}</label>
   <input *ngIf="isHeaderEdit" (blur)="isHeaderEdit=false" 
@@ -10,19 +10,7 @@
     </div>
 </div>
 
-
-
-
-<!-- <div class="row">
-    <div class="col-sm-10">{{cardData.name}}</div>
-    <div class="col-sm-2">
-      <i-trash-2 *ngIf="!cardData.readyToDrop" (click)="deleteMe($event,cardData)"></i-trash-2>
-    </div>
-  </div> -->
-
-
-
-<div class="card-body"    >
+<div class="card-body " style="background-color:floralwhite">
   <app-base-card *ngFor="let cardData of panelData.availableCards " class="card bg-info" [cardData]=cardData
   dnd-draggable [dragEnabled]="true" [dragData]="cardData" (onDragSuccess)="dragSuccessHandler($event)"
                      [dropZones]="['demo1']"  

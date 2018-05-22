@@ -7,7 +7,8 @@ import { Observable, Subscriber } from 'rxjs';
     providedIn: 'root'
 })
 export class MockDataService {
-    private cardData: Array<object> = [{ name: "Webview", type: "W1", cardId: "C13", url: "https://google.com" }, { name: "Configurable Webview", type: "W1", cardId: "C14", url: "https://google.com" },
+    private cardData: Array<object> = [{ name: "Webview", type: "W1", cardId: "C13", url: "https://google.com" }, 
+    { name: "Configurable Webview", type: "W1", cardId: "C14", url: "http://getcontenttools.com/demo" },
     { name: "Monthly Spent Graph", type: "B1", cardId: "C1" }, { name: "Money In", type: "B1", cardId: "C3" },
     { name: "Linked Accounts", type: "B1", cardId: "C4" }, { name: "Recent Activity", type: "B1", cardId: "C5" }, { name: "Insights", type: "B1", cardId: "C6" },
     { name: "WANG", type: "B1", cardId: "C7" }, { name: "Challenges", type: "B1", cardId: "C8" }, { name: "Steps vs Money Out", type: "B1", cardId: "C9" }, 

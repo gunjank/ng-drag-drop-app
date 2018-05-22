@@ -9,6 +9,7 @@ import { MockDataService } from '../mock-data.service';
 })
 export class BaseCardComponent implements OnInit {
   @Input() cardData:CardData;
+  isWebViewEdit:boolean=false;
 
   constructor(private mockDataService: MockDataService) {
     
@@ -19,6 +20,22 @@ export class BaseCardComponent implements OnInit {
   }
   deleteMe($event: any, c:CardData){
     this.mockDataService.deleteResultConfig(c.internalId,0);
+  }
+
+  editWebView(){
+    if(this.cardData.url && !this.cardData.readyToDrop){
+      this.isWebViewEdit=true;
+    }
+    
+  }
+
+
+
+  imageClickHandler(c:CardData){
+    if(!this.cardData.readyToDrop){
+      window.open(c.url, "_blank");
+    }
+   
   }
 
 }
