@@ -123,7 +123,7 @@ app.post('/view', function (req, res) {
     var payLoad = req.body
     var id = uuid();
     console.log("UUId for the Payload " + id);
-    console.log('request payload :: ' + req.body);
+    console.log('request payload :: ' + req.body.html);
     let key = store.saveHtml(id, payLoad, (err, value) => {
         if (value) {
             console.log("Data Persist " + value)
