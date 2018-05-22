@@ -18,5 +18,8 @@
     "leveldown": "^4.0.0",
     "levelup": "^2.0.2",
     "prebuild-install": "^4.0.0"
+  },
+  "engines": {
+    "node": "8.10.0"
   }
 }
