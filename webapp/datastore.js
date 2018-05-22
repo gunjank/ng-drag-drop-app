@@ -1,12 +1,15 @@
 // npm install prebuild-install || node-gyp rebuild
 // npm install levelup leveldown
 
-const levelup = require('levelup')
-const leveldown = require('leveldown')
-const encode = require('encoding-down')
+const levelup = require('levelup');
+const leveldown = require('leveldown');
+const encode = require('encoding-down');
+var escape_html_entities = require('escape-html-in-json');
 
 // 1) Create our store
-const db = levelup(encode(leveldown('./db'), { valueEncoding: 'json' }))
+const db = levelup(encode(leveldown('./configDb'), { valueEncoding: 'json' }));
+const htmlDb = levelup(encode(leveldown('./webDb'), { valueEncoding: 'json' }));
+
 
 module.exports = {
 
@@ -44,7 +47,7 @@ module.exports = {
             console.log(' key=' + key)
             console.log(' value =' + typeof value + ' :: ', value)
             return cb(null, value);
-        })
+        });
 
     },
 
@@ -74,6 +77,45 @@ module.exports = {
             console.log('db.batch operation successful!')
             return
         })
+    },
+    saveHtml: function(key,value,cb){
+
+       var val =JSON.stringify(value, escape_html_entities);
+        
+        htmlDb.put(key, val, function (err) {
+            if (err) {
+                console.log('htmlDb.put failed !', err) // some kind of I/O error
+                return cb(err, null)
+            }
+            else {
+
+                console.log('htmlDb.put success')
+                return cb(null, key)
+            }
+
+
+        });
+    },
+    fetchHtml: function(key,cb){
+       
+        htmlDb.get(key, function (err, value) {
+
+            if (err) {
+                if (err.notFound) {
+                    console.log('data not present for :' + key);
+                    return cb(err, null);
+
+                }
+                console.log('db.get failed', err)
+                return cb(err, null);
+            }
+
+            console.log(' key=' + key)
+            console.log(' value =' + "type "+typeof value + ' :: ', value)
+            var val = JSON.parse(val);
+            console.log('JSON Parsed value =' + typeof value + ' :: ', value)
+            return cb(null, val);
+        });
     }
 
 }
