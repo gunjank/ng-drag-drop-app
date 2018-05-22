@@ -1,10 +1,26 @@
 <div class="card-header row">
- 
+    <div class="col-sm-10">
   <label *ngIf="!isHeaderEdit" (click)="editHeader()" > {{panelData.name}}</label>
   <input *ngIf="isHeaderEdit" (blur)="isHeaderEdit=false" 
      type="text" 
       [(ngModel)]="panelData.name">
+  </div>
+  <div class="col-sm-2">
+      <i-trash-2 *ngIf="!panelData.isBase" (click)="deleteMe($event,panelData)"></i-trash-2>
+    </div>
 </div>
+
+
+
+
+<!-- <div class="row">
+    <div class="col-sm-10">{{cardData.name}}</div>
+    <div class="col-sm-2">
+      <i-trash-2 *ngIf="!cardData.readyToDrop" (click)="deleteMe($event,cardData)"></i-trash-2>
+    </div>
+  </div> -->
+
+
 
 <div class="card-body"    >
   <app-base-card *ngFor="let cardData of panelData.availableCards " class="card bg-success" [cardData]=cardData

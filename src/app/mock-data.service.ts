@@ -7,7 +7,7 @@ import { Observable, Subscriber } from 'rxjs';
     providedIn: 'root'
 })
 export class MockDataService {
-    private cardData: Array<object> = [{ name: "Webview", type: "W1", cardId: "C13", url:"https://google.com" }, { name: "Configurable Webview", type: "W1", cardId: "C14", url:"https://google.com"},
+    private cardData: Array<object> = [{ name: "Webview", type: "W1", cardId: "C13", url: "https://google.com" }, { name: "Configurable Webview", type: "W1", cardId: "C14", url: "https://google.com" },
     { name: "Monthly Spent Graph", type: "B1", cardId: "C1" }, { name: "Money Out", type: "B1", cardId: "C2" }, { name: "Money In", type: "B1", cardId: "C3" },
     { name: "Linked Accounts", type: "B1", cardId: "C4" }, { name: "Recent Activity", type: "B1", cardId: "C5" }, { name: "Insights", type: "B1", cardId: "C6" },
     { name: "WANG", type: "B1", cardId: "C7" }, { name: "Challenges", type: "B1", cardId: "C8" }, { name: "Steps vs Money Out", type: "B1", cardId: "C9" },
@@ -17,12 +17,17 @@ export class MockDataService {
     constructor() { }
 
     private resultConfig: Array<PanelData> = [];
+    private uniqueId: number = 0;
+    public getUniqueId() {
+        return this.uniqueId++;
+    }
 
     public getBasePanel() {
         let p: PanelData = new PanelData();
         p.name = "Main";
         p.type = "B1";
         p.isBase = true;
+        p.internalId = this.getUniqueId();
         p.availableCards = this.getListOfCards(p.type);
         return p;
     }
@@ -33,9 +38,9 @@ export class MockDataService {
             p.name = item.name;
             p.type = item.type;
             p.cardId = item.cardId;
-            p.url=item.url;
+            p.url = item.url;
+            p.internalId = this.getUniqueId();
             res.push(p);
-
         });
         return res;
     }
@@ -44,5 +49,33 @@ export class MockDataService {
     }
     public setResultConfig(p: PanelData) {
         this.resultConfig.push(p);
+    }
+    public deleteResultConfig(cId: number, pId: number) {
+        if (this.resultConfig.length > 0) {
+            if (pId > 0) {
+                this.resultConfig.forEach((item, i) => {
+                    if (pId === item.internalId) {
+                        this.resultConfig.splice(i, 1);
+                        return;
+                    }
+                });
+            } else if (cId > 0) {
+                this.resultConfig.forEach(p => {
+                    if (p.availableCards.length > 0) {
+                        p.availableCards.forEach((c, j) => {
+                            if (cId === c.internalId) {
+                                p.availableCards.splice(j, 1);
+                                return;
+                            }
+                            
+                        });
+                    }
+                });
+            }else{
+                console.log("No data available for given cId "+ cId +" or "+"pId "+pId);
+            }
+        } else {
+            console.log("No data available");
+        }
     }
 }

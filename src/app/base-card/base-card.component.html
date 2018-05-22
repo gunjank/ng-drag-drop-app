@@ -1,6 +1,31 @@
-<div class="card-header">
-  {{cardData.name}}
+<!-- <div class="card-header row">
+
+  {{cardData.name}} 
+  <span class="pull-right">
+ 
+    
+  </span>
+</div> -->
+
+<div class="row">
+  <div class="col-sm-10">{{cardData.name}}</div>
+  <div class="col-sm-2">
+    <i-trash-2 *ngIf="!cardData.readyToDrop" (click)="deleteMe($event,cardData)"></i-trash-2>
+  </div>
 </div>
+
+<!-- <div class="list-group">
+    <a href="#" class="list-group-item clearfix">
+      <span class="glyphicon glyphicon-file"></span>
+      {{cardData.name}} 
+      <span class="pull-right">
+         
+         
+          <i-trash-2></i-trash-2>
+      
+      </span>
+    </a>
+  </div> -->
 <!-- <div class="card-body">
   <h5 class="card-title">Special title treatment</h5>
   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>

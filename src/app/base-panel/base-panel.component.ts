@@ -35,6 +35,10 @@ export class BasePanelComponent implements OnInit {
     
   }
 
+  deleteMe($event: any, p:PanelData){
+    this.mockDataService.deleteResultConfig(0,p.internalId);
+  }
+
 
 
 

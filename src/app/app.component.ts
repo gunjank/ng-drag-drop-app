@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
     let cardData: CardData = Object.assign({},$event.dragData);
     if(cardData.readyToDrop){
       cardData.readyToDrop = false;
+      cardData.internalId = this.mockDataService.getUniqueId();
       p.availableCards.push(cardData);
     }
    
@@ -60,6 +61,7 @@ export class AppComponent implements OnInit {
   createPanel() {
     let p:PanelData = new PanelData();
     p.type = "C1";
+    p.internalId=this.mockDataService.getUniqueId();
     this.mockDataService.setResultConfig(p);
   }
 }

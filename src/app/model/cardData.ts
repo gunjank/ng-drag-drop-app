@@ -3,5 +3,7 @@ export class CardData {
      type: string;
      cardId: string;
      readyToDrop:boolean=true;
-     url:string=""
+     url:string="";
+     internalId:number;
+
   }
