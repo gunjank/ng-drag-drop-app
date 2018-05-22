@@ -29,7 +29,7 @@ export class BasePanelComponent implements OnInit {
     console.log(cardData.name + " " + cardData.type);
   }
   editHeader(){
-    if(!this.panelData.baseType){
+    if(!this.panelData.isBase){
       this.isHeaderEdit=true;
     }
     

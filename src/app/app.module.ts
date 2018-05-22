@@ -16,8 +16,6 @@ import { HttpClientModule } from '@angular/common/http';
     SimpleDndComponent,
     BaseCardComponent,
     BasePanelComponent
-
-    
   ],
   imports: [
     BrowserModule,

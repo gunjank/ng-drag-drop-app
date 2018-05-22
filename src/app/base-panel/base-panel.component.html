@@ -4,29 +4,7 @@
   <input *ngIf="isHeaderEdit" (blur)="isHeaderEdit=false" 
      type="text" 
       [(ngModel)]="panelData.name">
-  <!-- <div  *ngIf="panelData.baseType" >
-
-    <button class="btn btn-primary" (click)="createPanel()" >Edit</button>
-  </div> -->
-  
 </div>
-<!-- <div>
-  <label *ngIf="!isEdit" (click)="isEdit=true" >Name</label>
-  <input *ngIf="isEdit" (keydown.enter)="isEdit=false" 
-     type="text" 
-      [(ngModel)]="panelData.name">
-
-</div> -->
-
-
-<!-- <div class="card-body" *ngIf="panelData.type===P1"    >
-  <app-base-card *ngFor="let cardData of panelData.availableCards; let i = index" class="card bg-success" [cardData]=cardData
-  [dragData]="cardData" (onDragSuccess)="dragSuccessHandler($event)"
-                     dnd-sortable [sortableIndex]="i"
-  >
-  <span dnd-sortable-handle>=</span>
-</app-base-card>
-</div> -->
 
 <div class="card-body"    >
   <app-base-card *ngFor="let cardData of panelData.availableCards " class="card bg-success" [cardData]=cardData

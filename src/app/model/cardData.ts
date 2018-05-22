@@ -1,6 +1,7 @@
 export class CardData {
      name: string;
      type: string;
-     cost: number;
+     cardId: string;
      readyToDrop:boolean=true;
+     url:string=""
   }
