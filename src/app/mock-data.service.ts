@@ -8,9 +8,10 @@ import { Observable, Subscriber } from 'rxjs';
 })
 export class MockDataService {
     private cardData: Array<object> = [{ name: "Webview", type: "W1", cardId: "C13", url: "https://google.com" }, { name: "Configurable Webview", type: "W1", cardId: "C14", url: "https://google.com" },
-    { name: "Monthly Spent Graph", type: "B1", cardId: "C1" }, { name: "Money Out", type: "B1", cardId: "C2" }, { name: "Money In", type: "B1", cardId: "C3" },
+    { name: "Monthly Spent Graph", type: "B1", cardId: "C1" }, { name: "Money In", type: "B1", cardId: "C3" },
     { name: "Linked Accounts", type: "B1", cardId: "C4" }, { name: "Recent Activity", type: "B1", cardId: "C5" }, { name: "Insights", type: "B1", cardId: "C6" },
-    { name: "WANG", type: "B1", cardId: "C7" }, { name: "Challenges", type: "B1", cardId: "C8" }, { name: "Steps vs Money Out", type: "B1", cardId: "C9" },
+    { name: "WANG", type: "B1", cardId: "C7" }, { name: "Challenges", type: "B1", cardId: "C8" }, { name: "Steps vs Money Out", type: "B1", cardId: "C9" }, 
+    { name: "Money Out", type: "B1", cardId: "C2" },
     { name: "Money In vs Out", type: "B1", cardId: "C10" }, { name: "Wang Transactionss", type: "B1", cardId: "C11" }, { name: "Quotes/Did You Know", type: "B1", cardId: "C12" }
     ];
 
@@ -24,7 +25,7 @@ export class MockDataService {
 
     public getBasePanel() {
         let p: PanelData = new PanelData();
-        p.name = "Main";
+        p.name = "Drag & Drop Cards";
         p.type = "B1";
         p.isBase = true;
         p.internalId = this.getUniqueId();
