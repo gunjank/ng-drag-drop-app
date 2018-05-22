@@ -8,6 +8,8 @@
 # dependencies
 /node_modules
 /webapp/node_modules
+/webapp/configDb
+/webapp/webDb
 
 # IDEs and editors
 /.idea
