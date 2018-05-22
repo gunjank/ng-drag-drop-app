@@ -6,8 +6,13 @@
 </div> -->
 
 <!-- <app-simple-dnd></app-simple-dnd> -->
-<div class="card-header">
-  Drag and Drop Cards to Preview Panel.
+<div class="row card-header">
+    <span>&nbsp;</span>
+    <button class="btn btn-primary" (click)="createPanel()">Create Panel</button>
+    <span>&nbsp;</span>
+  
+    <button class="btn btn-primary" (click)="showConfig()">Save Your Design</button>
+
 </div>
 <div class="row">
   <app-base-panel class="card bg-info col-sm-3" [panelData]="basePanelData"></app-base-panel>
@@ -22,11 +27,11 @@
   ></app-base-panel> -->
 </div>
 <div class="row card-body">
-  <span>&nbsp;</span>
+  <!-- <span>&nbsp;</span>
   <button class="btn btn-primary" (click)="createPanel()">Create Panel</button>
   <span>&nbsp;</span>
 
-  <button class="btn btn-primary" (click)="showConfig()">Save Your Design</button>
+  <button class="btn btn-primary" (click)="showConfig()">Save Your Design</button> -->
 
   <!-- dnd-sortable-container [sortableData]="resultPanel.availableCards"     -->
 </div>
