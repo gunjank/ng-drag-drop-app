@@ -10,7 +10,7 @@ import { BasePanelComponent } from './base-panel/base-panel.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IconsModule } from './icons/icons.module';
-
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 
 
@@ -25,6 +25,8 @@ import { IconsModule } from './icons/icons.module';
     BrowserModule,
     NgbModule.forRoot(),
     DndModule.forRoot(),
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot(),
     FormsModule,
     HttpClientModule,
     IconsModule
