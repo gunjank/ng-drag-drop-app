@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   private fetchConfigResponse: HttpResponseData;
   title = 'Drag & Drop';
  
-  constructor(private mockDataService: MockDataService, private configService: ConfigService) {
+  constructor(private mockDataService: MockDataService, public configService: ConfigService) {
     this.basePanelData = mockDataService.getBasePanel();
   }
 
