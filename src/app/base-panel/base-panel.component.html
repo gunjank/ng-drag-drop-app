@@ -10,9 +10,7 @@
     </div>
 </div>
 
-<div class="card-body " style="background-color:floralwhite">
   <app-base-card *ngFor="let cardData of panelData.availableCards " class="card bg-info" [cardData]=cardData
   dnd-draggable [dragEnabled]="true" [dragData]="cardData" (onDragSuccess)="dragSuccessHandler($event)"
                      [dropZones]="['demo1']"  
   ></app-base-card>
-</div>
