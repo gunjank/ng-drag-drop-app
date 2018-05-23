@@ -16,18 +16,27 @@ const httpOptions = {
 })
 export class ConfigService {
   private configUrl = "";
+  private uniqueId: number = 1;
   resultConfig: Array<PanelData> = [];
   constructor(private http: HttpClient) {
- 
-    if (isDevMode() || (location.href!=null && location.href.indexOf("localhost")>0)) {
-      console.log("Running in dev mode .. and location is "+location.href);
+
+    if (isDevMode() || (location.href != null && location.href.indexOf("localhost") > 0)) {
+      console.log("Running in dev mode .. and location is " + location.href);
       this.configUrl = "http://localhost:3000";
     }
+  }
+
+
+  public getUniqueId() {
+    return this.uniqueId++;
+  }
+  public setUniqueId(n: number) {
+    this.uniqueId = n + 1;
   }
   // Disbale Cors
   // open -n -a /Applications/Google\ Chrome.app --args --user-data-dir="/tmp/someFolderName" --disable-web-security
 
-  fetch() :Observable<HttpResponseData>{
+  fetch(): Observable<HttpResponseData> {
     return this.http.get<HttpResponseData>(this.configUrl + "/config", httpOptions)
   }
 
@@ -40,30 +49,30 @@ export class ConfigService {
   // internal business login
   public deleteResultConfig(cId: number, pId: number) {
     if (this.resultConfig.length > 0) {
-        if (pId > 0) {
-            this.resultConfig.forEach((item, i) => {
-                if (pId === item.internalId) {
-                    this.resultConfig.splice(i, 1);
-                    return;
-                }
+      if (pId > 0) {
+        this.resultConfig.forEach((item, i) => {
+          if (pId === item.internalId) {
+            this.resultConfig.splice(i, 1);
+            return;
+          }
+        });
+      } else if (cId > 0) {
+        this.resultConfig.forEach(p => {
+          if (p.availableCards.length > 0) {
+            p.availableCards.forEach((c, j) => {
+              if (cId === c.internalId) {
+                p.availableCards.splice(j, 1);
+                return;
+              }
+
             });
-        } else if (cId > 0) {
-            this.resultConfig.forEach(p => {
-                if (p.availableCards.length > 0) {
-                    p.availableCards.forEach((c, j) => {
-                        if (cId === c.internalId) {
-                            p.availableCards.splice(j, 1);
-                            return;
-                        }
-                        
-                    });
-                }
-            });
-        }else{
-            console.log("No data available for given cId "+ cId +" or "+"pId "+pId);
-        }
+          }
+        });
+      } else {
+        console.log("No data available for given cId " + cId + " or " + "pId " + pId);
+      }
     } else {
-        console.log("No data available");
+      console.log("No data available");
     }
-}
+  }
 }

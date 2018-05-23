@@ -17,17 +17,13 @@ export class MockDataService {
     ];
 
     constructor() { }
-    private uniqueId: number = 0;
-    public getUniqueId() {
-        return this.uniqueId++;
-    }
+   
 
     public getBasePanel() {
         let p: PanelData = new PanelData();
         p.name = "Drag & Drop Cards";
         p.type = "B1";
         p.isBase = true;
-        p.internalId = this.getUniqueId();
         p.availableCards = this.getListOfCards(p.type);
         return p;
     }
@@ -39,7 +35,6 @@ export class MockDataService {
             p.type = item.type;
             p.cardId = item.cardId;
             p.url = item.url;
-            p.internalId = this.getUniqueId();
             p.isConfigEditor=item.isConfigEditor;
             p.htmlSource=item.htmlSource;
             res.push(p);
