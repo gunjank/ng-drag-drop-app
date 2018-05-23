@@ -5,5 +5,7 @@ export class CardData {
      readyToDrop:boolean=true;
      url:string="";
      internalId:number;
+     isConfigEditor:boolean=false;
+     htmlSource:string="";  
 
   }
