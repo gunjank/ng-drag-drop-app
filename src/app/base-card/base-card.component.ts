@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CardData } from '../model/cardData';
 import { MockDataService } from '../mock-data.service';
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-base-card',
@@ -11,7 +12,7 @@ export class BaseCardComponent implements OnInit {
   @Input() cardData:CardData;
   isWebViewEdit:boolean=false;
 
-  constructor(private mockDataService: MockDataService) {
+  constructor(private configService: ConfigService) {
     
 
    }
@@ -19,7 +20,7 @@ export class BaseCardComponent implements OnInit {
   ngOnInit() {
   }
   deleteMe($event: any, c:CardData){
-    this.mockDataService.deleteResultConfig(c.internalId,0);
+    this.configService.deleteResultConfig(c.internalId,0);
   }
 
   editWebView(){

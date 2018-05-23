@@ -12,57 +12,48 @@ import { HttpResponseData } from './model/httpResponseData';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  basePanelData:PanelData=new PanelData();
-  resultPanel: PanelData = new PanelData();
-  resultConfig:Array<PanelData>=[];
-  private _data = new BehaviorSubject<PanelData[]>([]);
+  basePanelData: PanelData = new PanelData();
   private httpResponseData: HttpResponseData;
-
+  private fetchConfigResponse: HttpResponseData;
   title = 'Drag & Drop';
-  constructor(private mockDataService: MockDataService,private configService:ConfigService) {
-
+ 
+  constructor(private mockDataService: MockDataService, private configService: ConfigService) {
     this.basePanelData = mockDataService.getBasePanel();
-    // this.resultPanel.name = "Preview";
-    // this.resultPanel.type = "R1";
   }
 
-  ngOnInit(){
-    this._data.subscribe(x=>{
-        this.resultConfig = this.mockDataService.getResultConfig();
-    });
+  ngOnInit() {
+ 
+    
+    this.configService.fetch().
+      subscribe(
+        res => {if(res.data!=null && res.data.length>0){this.configService.resultConfig=res.data}},
+        error => console.log("Error :: " + error)
+      );
   }
 
-  updatePreviewPanel($event: any, p:PanelData) {
-    let cardData: CardData = Object.assign({},$event.dragData);
-    if(cardData.readyToDrop){
+  updatePreviewPanel($event: any, p: PanelData) {
+    let cardData: CardData = Object.assign({}, $event.dragData);
+    if (cardData.readyToDrop) {
       cardData.readyToDrop = false;
       cardData.internalId = this.mockDataService.getUniqueId();
       p.availableCards.push(cardData);
     }
-   
-
   }
 
-  showConfig(){
-    // if(this.resultConfig.length>0){
-    //   alert(JSON.stringify(this.resultConfig));
-    // }else{
-    //   alert("No cards added !!");
-    // }
-   
-    if(this.resultConfig.length>0){
-        this.configService.save(this.resultConfig)
-            .subscribe(httpResponseData => this.httpResponseData)
-             
-    }else {
-        alert("No cards added !!");
-    } 
+  saveConfig() {
+    if (this.configService.resultConfig.length > 0) {
+      this.configService.save(this.configService.resultConfig)
+        .subscribe(httpResponseData => this.httpResponseData)
+
+    } else {
+      alert("No cards added !!");
+    }
   }
   createPanel() {
-    let p:PanelData = new PanelData();
+    let p: PanelData = new PanelData();
     p.type = "C1";
-    p.internalId=this.mockDataService.getUniqueId();
-    this.mockDataService.setResultConfig(p);
+    p.internalId = this.mockDataService.getUniqueId();
+    this.configService.resultConfig.push(p);
   }
 }
 

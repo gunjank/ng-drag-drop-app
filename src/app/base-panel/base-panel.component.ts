@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PanelData } from '../model/panelData';
 import { CardData } from '../model/cardData';
 import { MockDataService } from '../mock-data.service';
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-base-panel',
@@ -11,13 +12,8 @@ import { MockDataService } from '../mock-data.service';
 export class BasePanelComponent implements OnInit {
 
   @Input() panelData: PanelData;
-  previewPanelType: string = "P1";
   isHeaderEdit:boolean=false;
-
-
-  constructor(private mockDataService: MockDataService) {
-    this.previewPanelType = "P1";
-    
+  constructor(private configService: ConfigService) {
   }
 
   ngOnInit() {
@@ -36,7 +32,7 @@ export class BasePanelComponent implements OnInit {
   }
 
   deleteMe($event: any, p:PanelData){
-    this.mockDataService.deleteResultConfig(0,p.internalId);
+    this.configService.deleteResultConfig(0,p.internalId);
   }
 
 

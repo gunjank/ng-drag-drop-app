@@ -17,8 +17,6 @@ export class MockDataService {
     ];
 
     constructor() { }
-
-    private resultConfig: Array<PanelData> = [];
     private uniqueId: number = 0;
     public getUniqueId() {
         return this.uniqueId++;
@@ -48,38 +46,6 @@ export class MockDataService {
         });
         return res;
     }
-    public getResultConfig() {
-        return this.resultConfig;
-    }
-    public setResultConfig(p: PanelData) {
-        this.resultConfig.push(p);
-    }
-    public deleteResultConfig(cId: number, pId: number) {
-        if (this.resultConfig.length > 0) {
-            if (pId > 0) {
-                this.resultConfig.forEach((item, i) => {
-                    if (pId === item.internalId) {
-                        this.resultConfig.splice(i, 1);
-                        return;
-                    }
-                });
-            } else if (cId > 0) {
-                this.resultConfig.forEach(p => {
-                    if (p.availableCards.length > 0) {
-                        p.availableCards.forEach((c, j) => {
-                            if (cId === c.internalId) {
-                                p.availableCards.splice(j, 1);
-                                return;
-                            }
-                            
-                        });
-                    }
-                });
-            }else{
-                console.log("No data available for given cId "+ cId +" or "+"pId "+pId);
-            }
-        } else {
-            console.log("No data available");
-        }
-    }
+
+
 }
