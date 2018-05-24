@@ -12,82 +12,81 @@ var htmlDb = levelup(encode(leveldown('./webDb'), { valueEncoding: 'json' }));
 
 module.exports = {
 
-    save: function (key, value, cb) {
+    isDbOpen: function () {
 
         if (db.isClosed()) {
 
             console.log('Database closed , invoking db.open()')
             db.open((err) => {
-
                 if (err) {
-                    console.log("Error opening db connection")
-                    return null;
+                    console.log("Error opening db connection returning false")
+                    return false;
                 } else {
 
-                    console.log('db.open() Success ')
-                    return;
+                    console.log('db.open() Success returning true')
+                    return true;
                 }
             });
+        } else {
+            console.log("DB already open, returning true")
+            return true;
         }
+    },
+    save: function (key, value, cb) {
 
-        db.put(key, value, function (err) {
-            if (err) {
-                console.log('db.put failed !', err) // some kind of I/O error
-                return cb(err, null)
-            }
-            else {
+        if (this.isDbOpen()) {
 
-                console.log('db.put success')
-                return cb(null, 'success')
-            }
+            db.put(key, value, function (err) {
+                if (err) {
+                    console.log('db.put failed !', err) // some kind of I/O error
+                    return cb(err, null)
+                }
+                else {
+
+                    console.log('db.put success')
+                    return cb(null, 'success')
+                }
 
 
-        })
+            });
+        } else {
+
+            console.log('db not open returning err ')
+            return('error',null);
+        }
     },
 
     fetch: function (key, cb) {
 
-        if (db.isClosed()) {
+        if (this.isDbOpen()) {
 
-            console.log('Database closed , invoking db.open()')
-            db.open((err) => {
+            db.get(key, function (err, value) {
 
                 if (err) {
-                    console.log("Error opening db connection")
-                    return null;
-                } else {
+                    if (err.notFound) {
+                        console.log('data not present for :' + key);
+                        return cb(err, null);
 
-                    console.log('db.open() Success ')
-                    return;
-                }
-            });
-        }
-
-
-        db.get(key, function (err, value) {
-
-            if (err) {
-                if (err.notFound) {
-                    console.log('data not present for :' + key);
+                    }
+                    console.log('db.get failed', err)
                     return cb(err, null);
-
                 }
-                console.log('db.get failed', err)
-                return cb(err, null);
-            }
 
-            console.log(' key=' + key)
-            console.log(' value =' + typeof value + ' :: ', value)
-            return cb(null, value);
-        });
-
+                console.log(' key=' + key)
+                console.log(' value =' + typeof value + ' :: ', value)
+                return cb(null, value);
+            });
+        } else {
+            console.log('db not open returning err ')
+            return('error',null);
+        }
     },
     // Delete Operation
     remove: function (key) {
         return db.del(key, function (err) {
-            if (err) 
+            if (err)
                 console.log('db.del failed', err)
-                return
+            return
 
         })
     },
