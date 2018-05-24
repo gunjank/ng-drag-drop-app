@@ -37,7 +37,7 @@ app.get('/config', function (req, res) {
 
         if (value) {
             console.log('Data in DB ' + value);
-            console.log('Data Retrieved : ' + JSON.stringify(value));
+            //console.log('Data Retrieved : ' + JSON.stringify(value));
 
             let result = resultData();
             result.data = value;
@@ -60,7 +60,8 @@ app.get('/config', function (req, res) {
 app.post('/config', function (req, res) {
 
     var configs = req.body
-    console.log('request payload :: ' + JSON.stringify(configs))
+    
+   // console.log('request payload :: ' + JSON.stringify(configs))
 
     store.save(allConfig, configs, (err, value) => {
         if (value) {
