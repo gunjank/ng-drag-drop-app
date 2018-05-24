@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
         res => {
           if (res.data != null && res.data.length > 0) {
             this.configService.resultConfig = res.data,
-            this.setMaxId(res.data)
+              this.setMaxId(res.data)
           }
         },
         error => console.log("Error :: " + error)
@@ -39,15 +39,15 @@ export class AppComponent implements OnInit {
   setMaxId(a: Array<PanelData>) {
     let maxId = 0;
     a.forEach(p => {
-      if(maxId<p.internalId){maxId=p.internalId};
-      if(p.availableCards.length>0){
-        p.availableCards.forEach(c=>{
-          if(maxId<c.internalId){maxId=c.internalId};
+      if (maxId < p.internalId) { maxId = p.internalId };
+      if (p.availableCards.length > 0) {
+        p.availableCards.forEach(c => {
+          if (maxId < c.internalId) { maxId = c.internalId };
         })
       }
     });
     this.configService.setUniqueId(maxId);
-    console.log("maxId "+maxId);
+    console.log("maxId " + maxId);
   }
 
   updatePreviewPanel($event: any, p: PanelData) {
@@ -60,14 +60,10 @@ export class AppComponent implements OnInit {
   }
 
   saveConfig() {
-    if (this.configService.resultConfig.length > 0) {
-      this.configService.save(this.configService.resultConfig)
-        .subscribe(httpResponseData => this.httpResponseData)
-
-    } else {
-      alert("No cards added !!");
-    }
+    this.configService.save(this.configService.resultConfig)
+      .subscribe(httpResponseData => this.httpResponseData)
   }
+  
   createPanel() {
     let p: PanelData = new PanelData();
     p.type = "C1";
