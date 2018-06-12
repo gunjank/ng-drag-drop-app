@@ -14,7 +14,6 @@ export class BaseCardComponent implements OnInit {
 
   constructor(private configService: ConfigService) {
     
-
    }
 
   ngOnInit() {
@@ -30,11 +29,15 @@ export class BaseCardComponent implements OnInit {
     
   }
 
-
-
   imageClickHandler(c:CardData){
     if(!this.cardData.readyToDrop){
-      window.open(c.url, "_blank");
+      console.log(c.url);
+      if(c.url !==undefined && c.url !== null){
+        window.open(c.url, "_blank");
+      }else{
+        window.open("/mixpanel.html", "_blank");
+      }
+      
     }
    
   }
