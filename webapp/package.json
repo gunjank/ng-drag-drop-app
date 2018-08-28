@@ -15,10 +15,6 @@
     "encoding-down": "^5.0.1",
     "escape-html-in-json": "^1.0.0",
     "express": "^4.16.3",
-    "level": "^3.0.1",
-    "level-pathwise": "^4.0.0",
-    "leveldown": "^4.0.0",
-    "levelup": "^2.0.2",
     "prebuild-install": "^4.0.0",
     "swig": "^1.4.2",
     "uuid": "^3.2.1"
